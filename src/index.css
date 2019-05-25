@@ -23,9 +23,15 @@ body {
 }
 
 .game-box {
-  height: 30vh;
+  height: 35vh;
   width: 30vw;
   background-color: aliceblue;
   margin: 0 auto;
   margin-top: 10vh;
+}
+
+td {
+  width: 4vw;
+  height: 4vh;
+  border: 2px solid black;
 }

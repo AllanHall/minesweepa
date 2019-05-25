@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Header from './components/Header'
 
 class App extends Component {
+  state = {
+    board: []
+  }
   componentDidMount() {
     fetch('https://minesweeper-api.herokuapp.com/games', {
       method: 'POST',
@@ -13,16 +16,25 @@ class App extends Component {
       .then(resp => {
         return resp.json()
       })
-      .then(game => {
-        console.log(game)
+      .then(gameData => {
+        console.log(gameData.board)
+        this.setState({
+          board: gameData.board
+        })
       })
   }
+
   render() {
     return (
       <>
         <Header />
         <main>
-          <div className="game-box" />
+          <div className="game-box">
+            <tr>
+              {this.state.board.map(cell =>
+                )}
+            </tr>
+          </div>
         </main>
       </>
     )
