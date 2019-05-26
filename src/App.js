@@ -30,10 +30,17 @@ class App extends Component {
         <Header />
         <main>
           <div className="game-box">
-            <tr>
-              {this.state.board.map(cell =>
-                )}
-            </tr>
+            {this.state.board.map((row, i) => {
+              console.log(row, i)
+              return (
+                <div>
+                  {row.map((column, j) => {
+                    console.log(column, j)
+                    return <div className="cell">{this.state.board[i][j]}</div>
+                  })}
+                </div>
+              )
+            })}
           </div>
         </main>
       </>
