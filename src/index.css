@@ -31,7 +31,12 @@ body {
 }
 
 td {
-  width: 4vw;
-  height: 4vh;
-  border: 2px solid black;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid black;
+}
+
+.main {
+  margin: 0 auto;
+  margin-top: 1rem;
 }

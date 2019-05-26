@@ -3,6 +3,7 @@ import Header from './components/Header'
 
 class App extends Component {
   state = {
+    game: {},
     board: []
   }
   componentDidMount() {
@@ -17,8 +18,10 @@ class App extends Component {
         return resp.json()
       })
       .then(gameData => {
+        console.log(gameData)
         console.log(gameData.board)
         this.setState({
+          game: gameData,
           board: gameData.board
         })
       })
@@ -28,21 +31,25 @@ class App extends Component {
     return (
       <>
         <Header />
-        <main>
-          <div className="game-box">
+        <table className="main">
+          <tbody className="game-box">
             {this.state.board.map((row, i) => {
               console.log(row, i)
               return (
-                <div>
+                <tr key={i}>
                   {row.map((column, j) => {
                     console.log(column, j)
-                    return <div className="cell">{this.state.board[i][j]}</div>
+                    return (
+                      <td className="cell" key={j}>
+                        {this.state.board[i][j]}
+                      </td>
+                    )
                   })}
-                </div>
+                </tr>
               )
             })}
-          </div>
-        </main>
+          </tbody>
+        </table>
       </>
     )
   }
