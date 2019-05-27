@@ -4,7 +4,8 @@ import Header from './components/Header'
 class App extends Component {
   state = {
     game: {},
-    board: []
+    board: [],
+    display: ''
   }
   componentDidMount() {
     fetch('https://minesweeper-api.herokuapp.com/games', {
@@ -46,6 +47,15 @@ class App extends Component {
           game: gameData,
           board: gameData.board
         })
+        if (this.state.game.state === 'won') {
+          this.setState({
+            display: 'Winner!'
+          })
+        } else if (this.state.game.state === 'lost') {
+          this.setState({
+            display: 'Oh no, I lost!'
+          })
+        }
       })
   }
 
@@ -100,6 +110,7 @@ class App extends Component {
             })}
           </tbody>
         </table>
+        <div className="winner-display">{this.state.display}</div>
       </>
     )
   }
