@@ -27,6 +27,51 @@ class App extends Component {
       })
   }
 
+  checkGame = (row, column) => {
+    fetch(
+      `https://minesweeper-api.herokuapp.com/games/${this.state.game.id}/check`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ row: row, col: column })
+      }
+    )
+      .then(resp => {
+        return resp.json()
+      })
+      .then(gameData => {
+        this.setState({
+          game: gameData,
+          board: gameData.board
+        })
+      })
+  }
+
+  flagGame = (e, row, column) => {
+    e.preventDefault()
+    fetch(
+      `https://minesweeper-api.herokuapp.com/games/${this.state.game.id}/flag`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({ row: row, col: column })
+      }
+    )
+      .then(resp => {
+        return resp.json()
+      })
+      .then(gameData => {
+        this.setState({
+          game: gameData,
+          board: gameData.board
+        })
+      })
+  }
+
   render() {
     return (
       <>
@@ -40,7 +85,12 @@ class App extends Component {
                   {row.map((column, j) => {
                     console.log(column, j)
                     return (
-                      <td className="cell" key={j}>
+                      <td
+                        className="cell"
+                        key={j}
+                        onClick={() => this.checkGame(i, j)}
+                        onContextMenu={e => this.flagGame(e, i, j)}
+                      >
                         {this.state.board[i][j]}
                       </td>
                     )
