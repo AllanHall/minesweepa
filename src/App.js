@@ -6,29 +6,10 @@ class App extends Component {
     game: {},
     board: [],
     display: '',
-    value: 0
+    value: '0'
   }
   componentDidMount() {
-    fetch('https://minesweeper-api.herokuapp.com/games', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        difficulty: this.state.value
-      })
-    })
-      .then(resp => {
-        return resp.json()
-      })
-      .then(gameData => {
-        console.log(gameData)
-        console.log(gameData.board)
-        this.setState({
-          game: gameData,
-          board: gameData.board
-        })
-      })
+    this.resetGame()
   }
 
   checkGame = (row, column) => {
@@ -76,11 +57,12 @@ class App extends Component {
         return resp.json()
       })
       .then(gameData => {
-        console.log(gameData)
-        console.log(gameData.board)
         this.setState({
           game: gameData,
           board: gameData.board
+        })
+        this.setState({
+          display: ''
         })
       })
   }
@@ -108,25 +90,35 @@ class App extends Component {
       })
   }
 
+  updateDifficulty = event => {
+    console.log(event.target.value)
+    this.setState(
+      {
+        value: event.target.value
+      },
+      () => {
+        this.resetGame()
+      }
+    )
+  }
+
   render() {
     return (
       <>
         <Header />
-        <select className="select">
-          <option value={(this.state.value = 0)} selected>
+        <select className="select" onChange={this.updateDifficulty}>
+          <option value="0" selected>
             Easy
           </option>
-          <option value={(this.state.value = 1)}>Medium</option>
-          <option value={(this.state.value = 2)}>Hard</option>
+          <option value="1">Medium</option>
+          <option value="2">Hard</option>
         </select>
         <table className="main">
           <tbody className="game-box">
             {this.state.board.map((row, i) => {
-              console.log(row, i)
               return (
                 <tr key={i}>
                   {row.map((column, j) => {
-                    console.log(column, j)
                     return (
                       <td
                         className="cell"
