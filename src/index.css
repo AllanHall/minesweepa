@@ -22,6 +22,12 @@ body {
   padding-top: 5vh;
 }
 
+.select {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
 .game-box {
   height: 35vh;
   width: 30vw;

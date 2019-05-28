@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
+import Select from './components/Select'
 
 class App extends Component {
   state = {
@@ -86,6 +87,7 @@ class App extends Component {
     return (
       <>
         <Header />
+        <Select />
         <table className="main">
           <tbody className="game-box">
             {this.state.board.map((row, i) => {
