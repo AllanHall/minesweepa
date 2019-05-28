@@ -37,8 +37,8 @@ body {
 }
 
 td {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
   border: 3px solid black;
 }
 
@@ -53,4 +53,10 @@ td {
   font-weight: bold;
   font-size: 32px;
   padding-top: 2rem;
+}
+
+.reset {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
 }

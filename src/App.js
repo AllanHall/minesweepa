@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
-import Select from './components/Select'
 
 class App extends Component {
   state = {
     game: {},
     board: [],
-    display: ''
+    display: '',
+    value: 0
   }
   componentDidMount() {
     fetch('https://minesweeper-api.herokuapp.com/games', {
@@ -14,7 +14,9 @@ class App extends Component {
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({ difficulty: 0 })
+      body: JSON.stringify({
+        difficulty: this.state.value
+      })
     })
       .then(resp => {
         return resp.json()
@@ -60,6 +62,29 @@ class App extends Component {
       })
   }
 
+  resetGame = () => {
+    fetch('https://minesweeper-api.herokuapp.com/games', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        difficulty: this.state.value
+      })
+    })
+      .then(resp => {
+        return resp.json()
+      })
+      .then(gameData => {
+        console.log(gameData)
+        console.log(gameData.board)
+        this.setState({
+          game: gameData,
+          board: gameData.board
+        })
+      })
+  }
+
   flagGame = (e, row, column) => {
     e.preventDefault()
     fetch(
@@ -87,7 +112,13 @@ class App extends Component {
     return (
       <>
         <Header />
-        <Select />
+        <select className="select">
+          <option value={(this.state.value = 0)} selected>
+            Easy
+          </option>
+          <option value={(this.state.value = 1)}>Medium</option>
+          <option value={(this.state.value = 2)}>Hard</option>
+        </select>
         <table className="main">
           <tbody className="game-box">
             {this.state.board.map((row, i) => {
@@ -113,6 +144,9 @@ class App extends Component {
           </tbody>
         </table>
         <div className="winner-display">{this.state.display}</div>
+        <button className="reset" onClick={() => this.resetGame()}>
+          New Game
+        </button>
       </>
     )
   }
