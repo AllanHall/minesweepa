@@ -102,6 +102,26 @@ class App extends Component {
     )
   }
 
+  // Overlay
+
+  openOverlay = () => {
+    ;<div
+      className="overlay"
+      style={{
+        height: '100%'
+      }}
+    />
+  }
+
+  closeOverlay = () => {
+    ;<div
+      className="overlay"
+      style={{
+        height: '0%'
+      }}
+    />
+  }
+
   render() {
     return (
       <>
@@ -135,10 +155,25 @@ class App extends Component {
             })}
           </tbody>
         </table>
-        <div className="winner-display">{this.state.display}</div>
         <button className="reset" onClick={() => this.resetGame()}>
           New Game
         </button>
+        {/* Overlay, Make this first span sync with game state, line 34*/}
+        <button className="open-overlay" onClick={this.openOverlay()}>
+          open
+        </button>
+        <div className="Nav" className="overlay" />
+        <a
+          href="javascript:void(0)"
+          className="closeBtn"
+          // add reset function to this button
+          onClick={this.closeOverlay()}
+        >
+          New Game?
+        </a>
+        <div className="overlay-content">
+          <div className="winner-display">{this.state.display}</div>
+        </div>
       </>
     )
   }
