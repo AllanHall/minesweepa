@@ -16,7 +16,7 @@ body {
   background-color: black;
   color: aliceblue;
   height: 10vh;
-  font-size: 32px;
+  font-size: 40px;
   text-align: center;
   font-weight: bold;
   padding-top: 5vh;
@@ -47,14 +47,6 @@ td {
   margin-top: 1rem;
 }
 
-.winner-display {
-  text-align: center;
-  color: aliceblue;
-  font-weight: bold;
-  font-size: 32px;
-  padding-top: 2rem;
-}
-
 .reset {
   display: block;
   margin: 0 auto;
@@ -64,34 +56,43 @@ td {
 /* Overlay */
 .overlay {
   height: 100%;
-  width: 0;
+  width: 100%;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
   overflow-x: hidden;
-  transition: 0.2s;
-}
-
-.overlay-content {
-  position: relative;
-  top: 25%;
-  width: 100%;
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.overlay .closeBtn {
-  position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
 }
 
 .open-overlay {
   display: block;
   margin: 0 auto;
   margin-top: 1rem;
+}
+
+.close {
+  display: block;
+  margin: 0 auto;
+  font-size: 32px;
+  margin-top: 3rem;
+  border-radius: 8px;
+}
+
+.winner-display {
+  text-align: center;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 40px;
+  padding-top: 2rem;
+  margin-top: 10rem;
+}
+
+.overlay-display {
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 30vw;
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 2rem;
 }

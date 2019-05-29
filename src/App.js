@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
+import { blockParams } from 'handlebars'
 
 class App extends Component {
   state = {
     game: {},
     board: [],
     display: '',
-    value: '0'
+    value: '0',
+    overlayDisplay: 'none'
   }
   componentDidMount() {
     this.resetGame()
@@ -33,11 +35,13 @@ class App extends Component {
         })
         if (this.state.game.state === 'won') {
           this.setState({
-            display: 'Winner!'
+            display: 'Winner!',
+            overlayDisplay: 'block'
           })
         } else if (this.state.game.state === 'lost') {
           this.setState({
-            display: 'Oh no, I lost!'
+            display: 'Oh no, I lost!',
+            overlayDisplay: 'block'
           })
         }
       })
@@ -104,22 +108,11 @@ class App extends Component {
 
   // Overlay
 
-  openOverlay = () => {
-    ;<div
-      className="overlay"
-      style={{
-        height: '100%'
-      }}
-    />
-  }
-
   closeOverlay = () => {
-    ;<div
-      className="overlay"
-      style={{
-        height: '0%'
-      }}
-    />
+    this.setState({
+      overlayDisplay: 'none'
+    })
+    this.resetGame()
   }
 
   render() {
@@ -155,24 +148,18 @@ class App extends Component {
             })}
           </tbody>
         </table>
-        <button className="reset" onClick={() => this.resetGame()}>
-          New Game
-        </button>
-        {/* Overlay, Make this first span sync with game state, line 34*/}
-        <button className="open-overlay" onClick={this.openOverlay()}>
-          open
-        </button>
-        <div className="Nav" className="overlay" />
-        <a
-          href="javascript:void(0)"
-          className="closeBtn"
-          // add reset function to this button
-          onClick={this.closeOverlay()}
+        <div
+          className="overlay"
+          style={{
+            display: `${this.state.overlayDisplay}`
+          }}
         >
-          New Game?
-        </a>
-        <div className="overlay-content">
-          <div className="winner-display">{this.state.display}</div>
+          <div className="overlay-display">
+            <div className="winner-display">{this.state.display}</div>
+            <button className="close" onClick={() => this.closeOverlay()}>
+              New Game?
+            </button>
+          </div>
         </div>
       </>
     )
