@@ -34,15 +34,21 @@ class App extends Component {
           board: gameData.board
         })
         if (this.state.game.state === 'won') {
-          this.setState({
-            display: 'Winner!',
-            overlayDisplay: 'block'
-          })
+          window.setTimeout(
+            this.setState({
+              display: 'Winner!',
+              overlayDisplay: 'block'
+            }),
+            3000
+          )
         } else if (this.state.game.state === 'lost') {
-          this.setState({
-            display: 'Oh no, I lost!',
-            overlayDisplay: 'block'
-          })
+          window.setTimeout(
+            this.setState({
+              display: 'Oh no, I lost!',
+              overlayDisplay: 'block'
+            }),
+            3000
+          )
         }
       })
   }
