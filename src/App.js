@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
-import { blockParams } from 'handlebars'
 
 class App extends Component {
   state = {
@@ -44,7 +43,7 @@ class App extends Component {
         } else if (this.state.game.state === 'lost') {
           window.setTimeout(
             this.setState({
-              display: 'Oh no, I lost!',
+              display: 'Oh no, you lost!',
               overlayDisplay: 'block'
             }),
             3000
