@@ -40,13 +40,10 @@ class App extends Component {
             overlayDisplay: 'block'
           })
         } else if (this.state.game.state === 'lost') {
-          setTimeout(
-            this.setState({
-              display: 'Oh no, you lost!',
-              overlayDisplay: 'block'
-            }),
-            3000
-          )
+          this.setState({
+            display: 'Oh no, you lost!',
+            overlayDisplay: 'block'
+          })
         }
       })
   }
