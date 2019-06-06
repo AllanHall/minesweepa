@@ -107,3 +107,28 @@ td {
   padding-bottom: 2rem;
   border-radius: 10px;
 }
+
+figcaption {
+  padding-left: 5rem;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.bomb {
+  background-image: url('./images/tnt.png');
+  background-size: contain;
+  font-size: 0px;
+}
+
+.flag {
+  background-image: url('./images/sword.png');
+  background-size: contain;
+  font-size: 0px;
+}
+
+@media screen and (max-width: 845px) {
+  .overlay-display {
+    height: 30vh;
+  }
+}

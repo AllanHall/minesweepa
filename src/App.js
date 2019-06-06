@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
 
+import sound from './sounds/sound.mp3'
+
 class App extends Component {
   state = {
     game: {},
@@ -33,15 +35,12 @@ class App extends Component {
           board: gameData.board
         })
         if (this.state.game.state === 'won') {
-          window.setTimeout(
-            this.setState({
-              display: 'Winner!',
-              overlayDisplay: 'block'
-            }),
-            3000
-          )
+          this.setState({
+            display: 'Winner!',
+            overlayDisplay: 'block'
+          })
         } else if (this.state.game.state === 'lost') {
-          window.setTimeout(
+          setTimeout(
             this.setState({
               display: 'Oh no, you lost!',
               overlayDisplay: 'block'
@@ -111,6 +110,17 @@ class App extends Component {
     )
   }
 
+  checkCell = cell => {
+    let cellClass = 'cell'
+    if (cell === 'F') {
+      cellClass += ' flag'
+    }
+    if (cell === '*') {
+      cellClass += ' bomb'
+    }
+    return cellClass
+  }
+
   // Overlay
 
   closeOverlay = () => {
@@ -139,7 +149,7 @@ class App extends Component {
                   {row.map((column, j) => {
                     return (
                       <td
-                        className="cell"
+                        className={this.checkCell(this.state.board[i][j])}
                         key={j}
                         onClick={() => this.checkGame(i, j)}
                         onContextMenu={e => this.flagGame(e, i, j)}
@@ -153,6 +163,12 @@ class App extends Component {
             })}
           </tbody>
         </table>
+        <figure>
+          <figcaption>Minecraft Music</figcaption>
+          <audio src={sound} controls>
+            Your browser does not support the audio element.
+          </audio>
+        </figure>
         <div
           className="overlay"
           style={{
